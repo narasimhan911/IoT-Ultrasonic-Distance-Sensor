@@ -1,0 +1,77 @@
+#define TRIG 9
+#define ECHO 10
+
+// LED pins
+#define LED1 2
+#define LED2 3
+#define LED3 4
+#define LED4 5
+#define LED5 6
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+}
+
+void loop() {
+  long duration;
+  float distance;
+
+  // Trigger pulse
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+
+  // Echo reading
+  duration = pulseIn(ECHO, HIGH);
+  distance = (duration * 0.0343) / 2;
+
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // Turn off all LEDs first
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  digitalWrite(LED3, LOW);
+  digitalWrite(LED4, LOW);
+  digitalWrite(LED5, LOW);
+
+  // Light LEDs based on distance range
+  if (distance <= 5 && distance > 0) {
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    digitalWrite(LED3, HIGH);
+    digitalWrite(LED4, HIGH);
+    digitalWrite(LED5, HIGH);
+  } 
+  else if (distance <= 10) {
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    digitalWrite(LED3, HIGH);
+    digitalWrite(LED4, HIGH);
+  } 
+  else if (distance <= 15) {
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    digitalWrite(LED3, HIGH);
+  } 
+  else if (distance <= 20) {
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+  } 
+  else if (distance <= 25) {
+    digitalWrite(LED1, HIGH);
+  }
+
+  delay(400);
+}
