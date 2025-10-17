@@ -4,7 +4,7 @@ This project measures the distance of an object using an **Ultrasonic Sensor (HC
 
 ## 🔧 Components Used
 - Ultrasonic Sensor (HC-SR04)
-- ESP8266 / ESP32
+- Arduino Board
 - Breadboard and Jumper Wires
 - Arduino IDE(data to see Serial Monitor)
 
